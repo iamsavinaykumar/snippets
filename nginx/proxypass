@@ -1,0 +1,22 @@
+upstream frontend {
+  server localhost:8080;
+}
+
+upstream backend {
+  server localhost:8000;
+}
+
+server {
+  listen 80;
+  listen [::]:80;
+  
+  server_name savinaykumar.com www.savinaykumar.com;
+
+  location / {
+    proxy_pass http://frontend;
+  }
+
+  location /api {
+    proxy_pass http://backend;
+  }
+}
